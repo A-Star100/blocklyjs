@@ -5,9 +5,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production",
-    "start": "webpack serve --open --mode development"
+  "test": "echo Hello, this is Blockly.js test project!",
+  "dev": "webpack serve --config webpack.dev.js",
+  "build": "webpack --config webpack.prod.js",
+  "start": "serve -s public"
   },
   "keywords": [
     "blockly"
