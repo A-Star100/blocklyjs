@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Blockly.js</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <style>
+      /* ✅ Apply Inter font to everything */
+* {
+  font-family: "Inter", Arial, sans-serif !important;
+  font-stretch: 100%;
+}
+
+button {
+  color: white;
+  padding: 12px 35px;
+  background: #ff4d4d;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+  color: white;
+    background-color: #fc1b1b;
+    transform: translateY(-1px);
+}
+
+/* ✅ Ensure Blockly UI uses Inter */
+.blocklyText, .blocklyTooltipText, .blocklyFlyoutLabelText, .blocklyHtmlInput {
+  font-stretch: 100% !important;
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: 13.8px !important; /* Default is 14px */
+}
+
+/* ✅ Make sure block text uses Inter */
+.blocklySvg text, .blocklyWidgetDiv, .blocklyDropdownText {
+  font-stretch: 100% !important;
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: 13.8px !important; /* Default is 14px */
+}
+
+.blocklyText, 
+.blocklyTooltipText, 
+.blocklyFlyoutLabelText, 
+.blocklyHtmlInput, 
+.blocklySvg text, 
+.blocklyWidgetDiv, 
+.blocklyDropdownText {
+  font-stretch: 100% !important;
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: 13.8px !important; /* Default is 14px */
+}
+
+/* Apply Inter to all toolbox category labels */
+.blocklyToolboxDiv, 
+.blocklyTreeLabel, 
+.blocklyFlyoutLabelText, 
+.blocklyText, 
+.blocklyDropdownText {
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: 13px !important;
+}
+
+/* Also apply it to the toolbox buttons */
+.blocklyTreeRow {
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: 13px !important;
+}
+
+
+      /* ✅ Style the modal */
+      #aboutDialog {
+        font-stretch: 100%;
+        font-size: 13px; /* Default is 14px */
+        font-family: "Inter", Arial, sans-serif;
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        background: white;
+        padding: 20px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        z-index: 1000;
+      }
+
+      /* ✅ Dark overlay behind the modal */
+      #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      /* ✅ Center the content inside the modal */
+      #aboutDialog h2 {
+        font-stretch: 100%;
+        font-family: "Inter", Arial, sans-serif;
+        margin-top: 0;
+        font-size: 13px; /* Default is 14px */
+      }
+
+      /* ✅ Style close button */
+      #closeAbout {
+        font-stretch: 100%;
+        font-family: "Inter", Arial, sans-serif;
+        background: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 13px; /* Default is 14px */
+      }
+
+      button {
+        font-stretch: 100%;
+        font-family: "Inter", Arial, sans-serif;
+      }
+
+      #generatedCode {
+        font-stretch: 100%;
+        font-family: "Inter", Arial, sans-serif;
+        font-size: 13px; /* Default is 14px */
+      }
+
+      code {
+        font-stretch: 100%;
+        font-family: "Inter", Arial, sans-serif;
+        font-size: 13px; /* Default is 14px */
+      }
+
+      p {
+        font-stretch: 100%;
+        font-family: "Inter", Arial, sans-serif;
+        font-size: 13px; /* Default is 14px */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pageContainer">
+      <div id="outputPane">
+        <h2>Blockly.js</h2>
+        <pre id="generatedCode"><code></code></pre>
+        <div id="output"></div>
+        <button id="aboutButton">About</button>
+        <div style="height: 5px;"></div>
+        <button id="downloadButton">Save project as JavaScript</button>
+        <!-- ✅ Change About button to trigger a modal -->      </div>
+      <div id="blocklyDiv"></div>
+    </div>
+
+    <!-- ✅ About Modal -->
+    <div id="overlay"></div>
+    <div id="aboutDialog">
+      <!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+  </head>
+  <body>
+    <h2 style="font-size: 20px;">About Blockly.js</h2>
+    <div style="height: 1px;"></div>
+    <p><a href="https://developers.google.com/blockly">Blockly</a> is a block-based code editor by Google used in some of the most
+    popular block coding editors, such as <a href="https://scratch.org">Scratch</a>, <a href="https://appinventor.mit.edu">MIT App Inventor</a>, and <a href="https://www.microsoft.com/en-us/makecode">Microsoft's Makecode</a>.
+    <div style="height: 1px;"></div>
+    <b style='font-family: "Inter", Arial, sans-serif'>With this program, you can code using blocks and have it converted to JavaScript on-the-fly.</b>
+    <div style="height: 1px;"></div>
+    This is a modified version of the Blockly starter app that is created when you use Blockly with <code>npm</code> in the command line.
+    <div style="height: 13px;"></div>
+      <button id="closeAbout">Close</button>
+    </div>
+
+    <script>
+      // ✅ Function to download the generated code
+      const downloadCode = () => {
+        const codeDiv = document.getElementById('generatedCode').querySelector('code');
+        const code = codeDiv.innerText; // Get the generated JavaScript code
+
+        if (!code.trim()) {
+          alert("There isn't any code to download. You can add blocks to generate JavaScript.");
+          return;
+        }
+
+        const blob = new Blob([code], { type: 'text/javascript' }); // Create a .js file
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'myBlocklyProject.js'; // Set filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // Cleanup
+      };
+
+      document.getElementById('downloadButton').addEventListener('click', downloadCode);
+
+      // ✅ Open and close About modal
+      document.getElementById('aboutButton').addEventListener('click', () => {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('aboutDialog').style.display = 'block';
+      });
+
+      document.getElementById('closeAbout').addEventListener('click', () => {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('aboutDialog').style.display = 'none';
+      });
+    </script>
+  </body>
+</html>
