@@ -152,6 +152,14 @@ button:hover {
       <div id="outputPane">
         <h2>Blockly.js</h2>
         <pre id="generatedCode"><code></code></pre>
+        <!-- Add this right below the generated code -->
+<!-- Add this below the generated code -->
+<button id="runCodeButton">▶️ Run Code</button>
+<pre id="executedCode"><code></code></pre>
+<pre id="executionOutput"><code></code></pre>
+
+<!-- Hidden sandbox iframe for safe execution -->
+<iframe id="sandboxFrame" sandbox="allow-scripts" style="display: none;"></iframe>
         <div id="output"></div>
         <button id="aboutButton">About</button>
         <div style="height: 5px;"></div>
@@ -218,6 +226,52 @@ button:hover {
         document.getElementById('overlay').style.display = 'none';
         document.getElementById('aboutDialog').style.display = 'none';
       });
+
+      document.getElementById('runCodeButton').addEventListener('click', () => {
+    const codeDiv = document.getElementById('generatedCode').querySelector('code');
+    const executedCodeDiv = document.getElementById('executedCode').querySelector('code');
+    const outputDiv = document.getElementById('executionOutput').querySelector('code');
+
+    const code = codeDiv.innerText.trim();
+
+    if (!code) {
+        alert("There is no code to execute! Add some blocks first.");
+        return;
+    }
+
+    executedCodeDiv.innerText = `Executing:\n${code}`;
+
+    // Get the sandbox iframe
+    const iframe = document.getElementById('sandboxFrame');
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+    // Reset the iframe content before running new code
+    iframeDoc.open();
+    iframeDoc.write(`
+        <script>
+            try {
+                const result = (function() { ${code} })();
+                parent.postMessage({ type: 'executionResult', result }, '*');
+            } catch (error) {
+                parent.postMessage({ type: 'executionError', error: error.message }, '*');
+            }
+        <\/script>
+    `);
+    iframeDoc.close();
+});
+
+// Listen for messages from the sandboxed iframe
+window.addEventListener('message', (event) => {
+    if (event.data.type === 'executionResult') {
+        document.getElementById('executionOutput').querySelector('code').innerText = 
+            `✅ Done executing!\nOutput: ${event.data.result !== undefined ? event.data.result : "(No output)"}`;
+    } else if (event.data.type === 'executionError') {
+        document.getElementById('executionOutput').querySelector('code').innerText = 
+            `❌ Error:\n${event.data.error}`;
+    }
+});
+
+
     </script>
   </body>
 </html>
